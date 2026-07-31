@@ -18,33 +18,84 @@
         }
         
         .overlay {
-            background: rgba(15, 35, 20, 0.75); 
+            background: rgba(15, 35, 20, 0.45); 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding: 20px;
         }
 
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px 50px;
+        .content-panel {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
             border-radius: 20px;
-            max-width: 650px;
+            max-width: 850px;
+            width: 100%;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            text-align: center;
         }
 
+        /* Навигация (Вкладки) */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2em;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        .tab-btn:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-btn.active {
+            opacity: 1;
+            color: #a3e635;
+            background: rgba(163, 230, 53, 0.15);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Стили для вкладки "Информация" */
         h1 {
             font-size: 3.5em;
             margin-bottom: 10px;
             margin-top: 0;
             color: #a3e635; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
             letter-spacing: 2px;
         }
 
@@ -52,12 +103,11 @@
             font-size: 1.1em;
             line-height: 1.6;
             margin-bottom: 25px;
-            color: #e2e8f0;
+            color: #f8fafc;
         }
 
-        /* Блок с IP */
         .ip-box {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             padding: 15px 40px;
             border-radius: 50px;
             font-size: 1.5em;
@@ -77,7 +127,6 @@
             box-shadow: 0 0 20px rgba(163, 230, 53, 0.4);
         }
 
-        /* Кнопки доната и магазина */
         .action-buttons {
             display: flex;
             gap: 15px;
@@ -98,27 +147,11 @@
             gap: 8px;
         }
 
-        .btn-shop {
-            background: #a3e635;
-            color: #111;
-        }
+        .btn-shop { background: #a3e635; color: #111; }
+        .btn-shop:hover { background: #84cc16; transform: translateY(-3px); }
+        .btn-donate { background: #f59e0b; color: #fff; }
+        .btn-donate:hover { background: #d97706; transform: translateY(-3px); }
 
-        .btn-shop:hover {
-            background: #84cc16;
-            transform: translateY(-3px);
-        }
-
-        .btn-donate {
-            background: #f59e0b;
-            color: #fff;
-        }
-
-        .btn-donate:hover {
-            background: #d97706;
-            transform: translateY(-3px);
-        }
-
-        /* Социальные сети */
         .socials {
             margin-top: 35px;
             display: flex;
@@ -133,85 +166,378 @@
             gap: 8px;
             color: #fff;
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1); 
             padding: 10px 15px;
             border-radius: 50px;
             font-size: 0.95em;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .social-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-        }
-
-        .social-link i {
-            font-size: 1.2em;
-        }
-
-        /* Специфичные цвета при наведении для соцсетей */
+        .social-link:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); }
         .social-link.tg:hover { border-color: #0088cc; color: #0088cc; }
         .social-link.ds:hover { border-color: #5865F2; color: #5865F2; }
         .social-link.yt:hover { border-color: #FF0000; color: #FF0000; }
         .social-link.support:hover { border-color: #a3e635; color: #a3e635; }
+
+        /* Стили для вкладки "Правила" */
+        .rules-container {
+            text-align: left;
+            max-height: 60vh; /* Прокрутка для длинных правил */
+            overflow-y: auto;
+            padding-right: 15px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Кастомный скроллбар */
+        .rules-container::-webkit-scrollbar { width: 8px; }
+        .rules-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .rules-container::-webkit-scrollbar-thumb { background: #a3e635; border-radius: 10px; }
+
+        .rule-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-left: 4px solid #fff;
+        }
+
+        .rule-block.forbidden { border-left-color: #ef4444; }
+        .rule-block.allowed { border-left-color: #a3e635; }
+
+        .rule-block h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .forbidden h2 { color: #ef4444; }
+        .allowed h2 { color: #a3e635; }
+
+        .rule-category { margin-top: 20px; }
+        .rule-category h3 { color: #fff; font-size: 1.1em; margin-bottom: 10px; }
+
+        .rule-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .rule-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #cbd5e1;
+        }
+
+        .forbidden .rule-list i { color: #ef4444; margin-top: 4px; }
+        .allowed .rule-list i { color: #a3e635; margin-top: 4px; }
+
+        .restriction {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .warning-box {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            font-weight: 600;
+            margin-top: 20px;
+        }
         
     </style>
 </head>
 <body>
     <div class="overlay">
-        <div class="glass-panel">
-            <h1>GreenWood</h1>
-            <p class="description">Добро пожаловать на наш уютный ванильный кроссплатформенный сервер!<br>Выживай, строй и исследуй тайны дремучего леса вместе с нами.</p>
+        <div class="content-panel">
             
-            <!-- Копирование IP -->
-            <div class="ip-box" onclick="copyIP()">
-                gw-mine.xyz
-            </div>
-            <p id="copy-text" style="font-size: 0.9em; opacity: 0.7; margin-bottom: 0;">Нажми, чтобы скопировать IP</p>
-            
-            <!-- Кнопки доната -->
-            <div class="action-buttons">
-                <a href="http://shop.gw-mine.xyz" target="_blank" class="btn btn-shop">
-                    <i class="fas fa-shopping-cart"></i> Магазин на сервере
-                </a>
-                <a href="https://www.donationalerts.com/r/shop_all294" target="_blank" class="btn btn-donate">
-                    <i class="fas fa-heart"></i> Поддержать проект
-                </a>
+            <!-- Навигация -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('info', this)">Информация</button>
+                <button class="tab-btn" onclick="openTab('rules', this)">Правила</button>
             </div>
 
-            <!-- Социальные сети и поддержка -->
-            <div class="socials">
-                <a href="https://t.me/+zclHo-TYOUZkODMy" target="_blank" class="social-link tg">
-                    <i class="fab fa-telegram"></i> Новости
-                </a>
-                <a href="https://discord.gg/Gp6uhmw5Wh" target="_blank" class="social-link ds">
-                    <i class="fab fa-discord"></i> Discord
-                </a>
-                <a href="https://youtube.com/@greenwood-minecraft" target="_blank" class="social-link yt">
-                    <i class="fab fa-youtube"></i> YouTube
-                </a>
-                <a href="https://t.me/greenwood_off_support_bot" target="_blank" class="social-link support">
-                    <i class="fas fa-headset"></i> Поддержка
-                </a>
+            <!-- Вкладка: Информация -->
+            <div id="info" class="tab-content active">
+                <h1>GreenWood</h1>
+                <p class="description">Добро пожаловать на наш уютный ванильный кроссплатформенный сервер!<br>Выживай, строй и исследуй тайны дремучего леса вместе с нами.</p>
+                
+                <div class="ip-box" onclick="copyIP()">gw-mine.xyz</div>
+                <p id="copy-text" style="font-size: 0.9em; opacity: 0.7; margin-bottom: 0;">Нажми, чтобы скопировать IP</p>
+                
+                <div class="action-buttons">
+                    <a href="http://shop.gw-mine.xyz" target="_blank" class="btn btn-shop">
+                        <i class="fas fa-shopping-cart"></i> Магазин на сервере
+                    </a>
+                    <a href="https://www.donationalerts.com/r/shop_all294" target="_blank" class="btn btn-donate">
+                        <i class="fas fa-heart"></i> Поддержать проект
+                    </a>
+                </div>
+
+                <div class="socials">
+                    <a href="https://t.me/+zclHo-TYOUZkODMy" target="_blank" class="social-link tg"><i class="fab fa-telegram"></i> Новости</a>
+                    <a href="https://discord.gg/Gp6uhmw5Wh" target="_blank" class="social-link ds"><i class="fab fa-discord"></i> Discord</a>
+                    <a href="https://youtube.com/@greenwood-minecraft" target="_blank" class="social-link yt"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="https://t.me/greenwood_off_support_bot" target="_blank" class="social-link support"><i class="fas fa-headset"></i> Поддержка</a>
+                </div>
             </div>
+
+            <!-- Вкладка: Правила -->
+            <div id="rules" class="tab-content">
+                <div class="rules-container">
+                    
+                    <!-- Блок: ЗАПРЕЩЕНО -->
+                    <div class="rule-block forbidden">
+                        <h2>4.15. Полный список запрещенных модов [ЗАПРЕЩЕНО]</h2>
+                        
+                        <div class="rule-category">
+                            <h3>Чит-клиенты (запрещены полностью, даже если не используешь модули):</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-times-circle"></i> Wurst, Impact, Future, LiquidBounce, Rise, Novoline и любой другой клиент со встроенными читами.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Combat / PvP читы:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-times-circle"></i> Killaura, Mobaura — автоматическая атака по игрокам/мобам.</li>
+                                <li><i class="fas fa-times-circle"></i> Crystalaura — авто-постановка и автоматический взрыв кристаллов.</li>
+                                <li><i class="fas fa-times-circle"></i> AimAssist — искусственная помощь в наведении прицела на цель.</li>
+                                <li><i class="fas fa-times-circle"></i> Reach — нелегальное увеличение дальности удара или взаимодействия с блоками.</li>
+                                <li><i class="fas fa-times-circle"></i> Hitboxes — искусственное увеличение хитбоксов игроков или мобов.</li>
+                                <li><i class="fas fa-times-circle"></i> Tracers — отображение линий к игрокам/мобам сквозь любые стены.</li>
+                                <li><i class="fas fa-times-circle"></i> Triggerbot — автоматический удар в момент, когда цель попадает в прицел.</li>
+                                <li><i class="fas fa-times-circle"></i> Velocity / AntiKnockback — изменение или полное убирание отбрасывания персонажа при ударе.</li>
+                                <li><i class="fas fa-times-circle"></i> SafeFall — читерская отмена получения урона от падения с высоты.</li>
+                                <li><i class="fas fa-times-circle"></i> AutoTotem — автоматическая моментальная постановка тотема в оффхенд (левую руку).</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Movement читы:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-times-circle"></i> Fly — полёт в режиме выживания.</li>
+                                <li><i class="fas fa-times-circle"></i> Speed — искусственное увеличение скорости бега, ходьбы или полёта.</li>
+                                <li><i class="fas fa-times-circle"></i> BHop — прыжки со сторонним неестественным ускорением.</li>
+                                <li><i class="fas fa-times-circle"></i> LongJump — нелегально увеличенный по длине прыжок.</li>
+                                <li><i class="fas fa-times-circle"></i> Step — автоматическая возможность забираться на блоки высотой выше 1 без прыжка.</li>
+                                <li><i class="fas fa-times-circle"></i> Scaffold — автоматическая моментальная постановка блоков под ноги при ходьбе.</li>
+                                <li><i class="fas fa-times-circle"></i> EntitySpeed — читерское ускорение передвижения на лошади, элитре или лодке.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Exploits / ESP:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-times-circle"></i> ChestESP — подсветка и отображение контуров сундуков/шалкер-боксов сквозь стены.</li>
+                                <li><i class="fas fa-times-circle"></i> BaseFinder — программы, плагины или моды для автоматического поиска баз по загрузке чанков.</li>
+                                <li><i class="fas fa-times-circle"></i> SeedCracker — подбор и взлом сида генерации игрового мира.</li>
+                                <li><i class="fas fa-times-circle"></i> StrongholdCalculator — автоматический скрытый расчёт позиции портала в Энд-мир.</li>
+                                <li><i class="fas fa-times-circle"></i> Любые модификации типа ESP на игроков, мобов и сущности вне прямой зоны видимости.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Запрещенная автоматизация и эксплойты:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-times-circle"></i> Функция Printer (авто-строительство из Litematica / Schematica).</li>
+                                <li><i class="fas fa-times-circle"></i> Cleancut — моментальная рубка всего дерева целиком.</li>
+                                <li><i class="fas fa-times-circle"></i> InventoryMove — доступ к чужому инвентарю без GUI.</li>
+                                <li><i class="fas fa-times-circle"></i> Tweakeroo — функции невозможного размещения блоков (placement).</li>
+                                <li><i class="fas fa-times-circle"></i> Baritone — ЗАПРЕЩЕНЫ ЛЮБЫЕ ФУНКЦИИ КРОМЕ указанных в разрешенных (#goto, #tunnel, #sel, застройка по чертежам).</li>
+                                <li><i class="fas fa-times-circle"></i> Сторонние моды на AutoFish (не из кастомного мода сервера Greenwood).</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Ресурспаки (запрещены, если дают нечестное преимущество):</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-times-circle"></i> X-ray — любого типа, вида и структуры.</li>
+                                <li><i class="fas fa-times-circle"></i> Текстуры, делающие стандартные прозрачные блоки непрозрачными, или наоборот.</li>
+                                <li><i class="fas fa-times-circle"></i> Текстуры, полностью убирающие отображение лавы, воды, дыма или тумана ради улучшения обзора.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Прочее:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-times-circle"></i> Иные моды, признанные администрацией Greenwood запрещенными.</li>
+                            </ul>
+                        </div>
+
+                        <div class="warning-box">
+                            ВНИМАНИЕ: Наказание за использование — Бан от 15 до 30 дней / Перманентный бан при повторном нарушении (рецидиве).
+                        </div>
+                    </div>
+
+                    <!-- Блок: РАЗРЕШЕНО -->
+                    <div class="rule-block allowed">
+                        <h2>4.16. Полный список разрешенных автоматизаций и модов [РАЗРЕШЕНО]</h2>
+                        
+                        <div class="rule-category">
+                            <h3>Клиенты (разрешены полностью):</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-check-circle"></i> Vanilla, Lunar Client, Badlion Client, Feather Client, Vivecraft (VR).</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Кликеры, макросы и другие моды:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-check-circle"></i> Кликеры, макросы, программы на базе AutoHotkey — разрешены для AFK-ферм и повседневных действий.</li>
+                                <li><i class="fas fa-check-circle"></i> Любые специализированные авто-кликеры для автоматического использования предметов на фермах ресурсов.</li>
+                                <li><i class="fas fa-check-circle"></i> Моды для автоматической добычи и сбора предметов/ресурсов без прямого участия игрока у монитора.</li>
+                                <li><i class="fas fa-check-circle"></i> Моды для автоматического выполнения базовых команд сервера и взаимодействия с его функционалом.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Визуальные эффекты и оптимизация:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-check-circle"></i> Sodium, Lithium, FerriteCore, Phosphor, BadOptimizations.</li>
+                                <li><i class="fas fa-check-circle"></i> OptiFine / OptiFabric.</li>
+                                <li><i class="fas fa-check-circle"></i> Iris Shaders — разрешены абсолютно любые шейдерпаки (Complementary, BSL, SEUS и др.).</li>
+                                <li><i class="fas fa-check-circle"></i> Zoomify, OK Zoomer, Zoomies — моды на приближение камеры.</li>
+                                <li><i class="fas fa-check-circle"></i> Fullbright — разрешён мод на яркое зрение в темноте и любые его аналоги (включая ручные настройки гаммы).</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Моды для записи игр:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-check-circle"></i> ReplayMod и любые внешние программы для записи геймплея (OBS, Medal и т.д.).</li>
+                                <li><i class="fas fa-check-circle"></i> Simple Voice Chat (внутриигровой позиционный голосовой чат).</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Технические моды (с ограничениями):</h3>
+                            <ul class="rule-list">
+                                <li>
+                                    <div>
+                                        <i class="fas fa-check-circle"></i> Baritone<br>
+                                        <span class="restriction">[ОГРАНИЧЕНИЕ]: Только: #goto передвижение, #tunnel копание туннелей, #sel, застройка по чертежам.</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <i class="fas fa-check-circle"></i> Litematica / Schematica<br>
+                                        <span class="restriction">[ОГРАНИЧЕНИЕ]: Только для отображения голограмм. Функция Printer СТРОГО ЗАПРЕЩЕНА.</span>
+                                    </div>
+                                </li>
+                                <li><i class="fas fa-check-circle"></i> MiniHUD — разрешен для вывода технической информации на экран.</li>
+                                <li><i class="fas fa-check-circle"></i> Spark (профилировщик), Chunky (пре-генерация чанков), Clumps (объединение сфер опыта).</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>FreeCam:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-check-circle"></i> FreeCam — разрешен.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Сортировка сундуков:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-check-circle"></i> Chest Tracker / Inventory Sorter / Chest Sorter — полностью разрешены.</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Авто-рыбалка:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-check-circle"></i> AutoFish — из кастомного мода от сервера Greenwood (который не обязателен).</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-category">
+                            <h3>Иные разрешённые моды:</h3>
+                            <ul class="rule-list">
+                                <li><i class="fas fa-check-circle"></i> ToggleSprint, ToggleSneak, Freelook.</li>
+                                <li><i class="fas fa-check-circle"></i> AppleSkin, Jade / HWYLA, JEI / REI, Shulker Box Tooltip.</li>
+                                <li><i class="fas fa-check-circle"></i> Mouse Tweaks, Item Scroller, ArmorStatus, DirectionHUD, Coordinates, Keystrokes, Custom Crosshair.</li>
+                                <li><i class="fas fa-check-circle"></i> Entity Healthbars, Despawn Spheres, RealTime / InGameTime, Autorespawn, Autoreconnect, Elytra Chestplate Swapper.</li>
+                                <li><i class="fas fa-check-circle"></i> Xaero's Minimap / Worldmap, JourneyMap и любые мини-карты (разрешены ВСЕ, включая радар).</li>
+                                <li><i class="fas fa-check-circle"></i> Ресурспаки: низкий огонь, короткие мечи, обводка руд, чистое стекло, прозрачная вода/лава/дождь, отключение тыквы и тошноты, невидимый щит/тотем, любые 3D и эмиссивные текстуры.</li>
+                                <li><i class="fas fa-check-circle"></i> Иные моды, разрешённые администрацией сервера по умолчанию.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- Скрипт для копирования IP -->
+    <!-- Скрипты: Копирование IP и переключение вкладок -->
     <script>
-        function copyIP() {
-            navigator.clipboard.writeText("gw-mine.xyz");
-            const copyText = document.getElementById("copy-text");
-            copyText.innerText = "IP успешно скопирован!";
-            copyText.style.color = "#a3e635";
-            copyText.style.opacity = "1";
+        // Функция переключения вкладок
+        function openTab(tabName, btn) {
+            var i, tabcontent, tabbtns;
             
-            setTimeout(() => {
-                copyText.innerText = "Нажми, чтобы скопировать IP";
-                copyText.style.color = "#fff";
-                copyText.style.opacity = "0.7";
-            }, 2500);
+            // Скрываем все вкладки
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Убираем класс active у всех кнопок
+            tabbtns = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabbtns.length; i++) {
+                tabbtns[i].classList.remove("active");
+            }
+            
+            // Показываем нужную вкладку и делаем кнопку активной
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            btn.classList.add("active");
+        }
+
+        // Железобетонная функция копирования IP
+        function copyIP() {
+            var ipToCopy = "gw-mine.xyz";
+            
+            var tempInput = document.createElement("input");
+            tempInput.value = ipToCopy;
+            tempInput.style.position = "absolute";
+            tempInput.style.left = "-9999px";
+            tempInput.style.top = "0";
+            document.body.appendChild(tempInput);
+            
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); 
+            
+            try {
+                document.execCommand("copy");
+                var copyText = document.getElementById("copy-text");
+                copyText.innerText = "IP успешно скопирован!";
+                copyText.style.color = "#a3e635";
+                
+                setTimeout(function() {
+                    copyText.innerText = "Нажми, чтобы скопировать IP";
+                    copyText.style.color = "#fff";
+                }, 2500);
+            } catch (err) {
+                alert("Ошибка копирования. Скопируйте IP вручную: " + ipToCopy);
+            }
+            
+            document.body.removeChild(tempInput);
         }
     </script>
 </body>
