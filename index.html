@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenWood | Лесной сервер Minecraft</title>
+    <!-- Подключаем шрифты и иконки -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        
+        .overlay {
+            background: rgba(15, 35, 20, 0.75); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px 50px;
+            border-radius: 20px;
+            max-width: 650px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            margin-top: 0;
+            color: #a3e635; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            letter-spacing: 2px;
+        }
+
+        p.description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #e2e8f0;
+        }
+
+        /* Блок с IP */
+        .ip-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 10px 0;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #a3e635;
+        }
+
+        .ip-box:hover {
+            background: #a3e635;
+            color: #111;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(163, 230, 53, 0.4);
+        }
+
+        /* Кнопки доната и магазина */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-shop {
+            background: #a3e635;
+            color: #111;
+        }
+
+        .btn-shop:hover {
+            background: #84cc16;
+            transform: translateY(-3px);
+        }
+
+        .btn-donate {
+            background: #f59e0b;
+            color: #fff;
+        }
+
+        .btn-donate:hover {
+            background: #d97706;
+            transform: translateY(-3px);
+        }
+
+        /* Социальные сети */
+        .socials {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .social-link i {
+            font-size: 1.2em;
+        }
+
+        /* Специфичные цвета при наведении для соцсетей */
+        .social-link.tg:hover { border-color: #0088cc; color: #0088cc; }
+        .social-link.ds:hover { border-color: #5865F2; color: #5865F2; }
+        .social-link.yt:hover { border-color: #FF0000; color: #FF0000; }
+        .social-link.support:hover { border-color: #a3e635; color: #a3e635; }
+        
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="glass-panel">
+            <h1>GreenWood</h1>
+            <p class="description">Добро пожаловать на наш уютный ванильный кроссплатформенный сервер!<br>Выживай, строй и исследуй тайны дремучего леса вместе с нами.</p>
+            
+            <!-- Копирование IP -->
+            <div class="ip-box" onclick="copyIP()">
+                gw-mine.xyz
+            </div>
+            <p id="copy-text" style="font-size: 0.9em; opacity: 0.7; margin-bottom: 0;">Нажми, чтобы скопировать IP</p>
+            
+            <!-- Кнопки доната -->
+            <div class="action-buttons">
+                <a href="http://shop.gw-mine.xyz" target="_blank" class="btn btn-shop">
+                    <i class="fas fa-shopping-cart"></i> Магазин на сервере
+                </a>
+                <a href="https://www.donationalerts.com/r/shop_all294" target="_blank" class="btn btn-donate">
+                    <i class="fas fa-heart"></i> Поддержать проект
+                </a>
+            </div>
+
+            <!-- Социальные сети и поддержка -->
+            <div class="socials">
+                <a href="https://t.me/+zclHo-TYOUZkODMy" target="_blank" class="social-link tg">
+                    <i class="fab fa-telegram"></i> Новости
+                </a>
+                <a href="https://discord.gg/Gp6uhmw5Wh" target="_blank" class="social-link ds">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+                <a href="https://youtube.com/@greenwood-minecraft" target="_blank" class="social-link yt">
+                    <i class="fab fa-youtube"></i> YouTube
+                </a>
+                <a href="https://t.me/greenwood_off_support_bot" target="_blank" class="social-link support">
+                    <i class="fas fa-headset"></i> Поддержка
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипт для копирования IP -->
+    <script>
+        function copyIP() {
+            navigator.clipboard.writeText("gw-mine.xyz");
+            const copyText = document.getElementById("copy-text");
+            copyText.innerText = "IP успешно скопирован!";
+            copyText.style.color = "#a3e635";
+            copyText.style.opacity = "1";
+            
+            setTimeout(() => {
+                copyText.innerText = "Нажми, чтобы скопировать IP";
+                copyText.style.color = "#fff";
+                copyText.style.opacity = "0.7";
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
